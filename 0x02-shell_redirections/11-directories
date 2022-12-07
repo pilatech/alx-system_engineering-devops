@@ -1,2 +1,6 @@
 #!/bin/bash
+<<<<<<< HEAD
 find . -type d -path './*' -print | wc -l
+=======
+ls -dRl */ | wc -l 
+>>>>>>> 1152d9ac6d4399ff316a5273ca7586b18d7582ef
