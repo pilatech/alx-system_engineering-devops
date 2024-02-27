@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/usr/bin/env bash
 # Script for displaying 12hr clock
 i=0
 while [ $i -le 12 ];
