@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Script to print fizzbuzz
 i=1
 while [ $i -le 100 ]
 do
@@ -18,4 +19,3 @@ do
 	fi
 	((i++))
 done
-
