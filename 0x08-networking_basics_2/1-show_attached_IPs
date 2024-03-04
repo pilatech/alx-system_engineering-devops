@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Script to show IPv4 attached to the commuter
+cut -d '.' -f 1-4 -s /etc/hosts | cut -f 1
