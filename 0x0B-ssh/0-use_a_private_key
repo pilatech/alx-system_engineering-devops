@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# log into a remote system with ssh
+ssh ubuntu@8.8.8.8
