@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Tell who is logged into the system
+su -c whoami "$1";
