@@ -17,10 +17,10 @@ user = json.loads(user_req.text)
 completed = []
 total = len(todos)
 for i in todos:
-    if(i['completed']):
-        completed.append(i['title'])
+    if(i.get('completed')):
+        completed.append(i.get('title'))
 
 done = len(completed)
-print(f"Employee {user['name']} is done with tasks({done}/{total}):")
+print(f"Employee {user.get('name')} is done with tasks({done}/{total}):")
 for todo in completed:
     print(f"\t{todo}")
