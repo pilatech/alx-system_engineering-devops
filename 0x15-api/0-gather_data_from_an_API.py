@@ -24,4 +24,4 @@ if __name__ == "__main__":
     done = len(completed)
     print(f"Employee {user.get('name')} is done with tasks({done}/{total}):")
     for todo in completed:
-        print(f"    {todo}")
+        print(f"\t {todo}")
