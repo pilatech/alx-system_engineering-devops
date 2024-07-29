@@ -1,27 +1,31 @@
 #!/usr/bin/python3
-"""This script makes an API request and display data"""
+"""Module for importing and displaying employee data"""
 
-if __name__ == "__main__":
-    import json
-    import requests
-    import sys
 
-    user_id = sys.argv[1]
-    todo_url = f"https://jsonplaceholder.typicode.com/users/{user_id}/todos"
-    todo_req = requests.get(todo_url)
-    todos = json.loads(todo_req.text)
+import json
+import requests
+import sys
 
-    user_url = f"https://jsonplaceholder.typicode.com/users/{user_id}"
-    user_req = requests.get(user_url)
-    user = json.loads(user_req.text)
-
-    completed = []
-    total = len(todos)
-    for i in todos:
-        if (i.get('completed')):
-            completed.append(i.get('title'))
-
-    done = len(completed)
-    print(f"Employee {user.get('name')} is done with tasks({done}/{total}):")
-    for todo in completed:
-        print(f"\t {todo}")
+if len(sys.argv) >= 2:
+    cid = sys.argv[1]
+    user_url = f"https://jsonplaceholder.typicode.com/users/{cid}"
+    r = requests.get(user_url)
+    employee = r.json()
+    eid = employee.get('id')
+    name = employee.get('name')
+    todos_url = "https://jsonplaceholder.typicode.com/todos"
+    r = requests.get(todos_url)
+    all_todos = r.json()
+    user_todos = []
+    done = []
+    for todo in all_todos:
+        if todo.get('userId') == int(cid):
+            user_todos.append(todo)
+    for todo in user_todos:
+        if todo.get('completed'):
+            done.append(todo)
+    done_s = len(done)
+    user_s = len(user_todos)
+    print(f"Employee {name} is done with tasks({done_s}/{user_s}):")
+    for todo in done:
+        print(f"\t {todo.get('title')}")
