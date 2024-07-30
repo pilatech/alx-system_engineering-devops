@@ -34,6 +34,6 @@ if __name__ == "__main__":
                 line += ', '
             employee_JSON += line
         employee_JSON += ']}'
-        print(employee_JSON)
-        with open(f"{eid}.JSON", 'w') as f:
+
+        with open(f"{eid}.json", 'w') as f:
             f.write(employee_JSON)
