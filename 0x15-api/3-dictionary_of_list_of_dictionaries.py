@@ -1,15 +1,18 @@
 #!/usr/bin/python3
-"""Module for getting employee todo data into JSON
+"""Module for getting todo employee data into JSON
 It takes employee ID as an argument and works out their todos
 """
 
 import json
 import requests
-import sys
 
 if __name__ == "__main__":
-    if len(sys.argv) >= 2:
-        cid = sys.argv[1]
+    r = requests.get("https://jsonplaceholder.typicode.com/users")
+    employee_JSON = ''
+    employees = r.json()
+    emp_s = len(employees)
+    for k in range(emp_s):
+        cid = employees[k].get('id')
         user_url = f"https://jsonplaceholder.typicode.com/users/{cid}"
         r = requests.get(user_url)
         employee = r.json()
@@ -22,18 +25,20 @@ if __name__ == "__main__":
         for todo in all_todos:
             if todo.get('userId') == int(cid):
                 user_todos.append(todo)
-        employee_JSON = '{"' + str(eid) + '": ['
+        employee_JSON += '{"' + str(eid) + '": ['
         todos_s = len(user_todos)
         for i in range(todos_s):
-            line = '{"task": "' + user_todos[i].get('title') + '", '
+            line = '{"username": "' + employee.get('username') + '", '
+            line += '"task": "' + user_todos[i].get('title') + '", '
             completed = str(user_todos[i].get('completed')).lower()
-            line += '"completed": ' + completed + ', '
-            line += '"username": "' + employee.get('username')
-            line += '"}'
+            line += '"completed": ' + completed
+            line += '}'
             if i != todos_s - 1:
                 line += ', '
             employee_JSON += line
         employee_JSON += ']}'
+        if k != emp_s - 1:
+            employee_JSON += ', '
 
-        with open(f"{eid}.json", 'w') as f:
-            f.write(employee_JSON)
+    with open(f"todo_all_employees.json", 'w') as f:
+        f.write(employee_JSON)
