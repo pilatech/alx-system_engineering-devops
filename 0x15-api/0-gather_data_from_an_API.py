@@ -1,5 +1,8 @@
 #!/usr/bin/python3
-"""Module for importing and displaying employee data"""
+"""Module for importing and displaying employee data
+It takes employee ID as an argument and works out their todos
+"""
+
 import json
 import requests
 import sys
