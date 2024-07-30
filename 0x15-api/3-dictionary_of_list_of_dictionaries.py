@@ -8,7 +8,7 @@ import requests
 
 if __name__ == "__main__":
     r = requests.get("https://jsonplaceholder.typicode.com/users")
-    employee_JSON = ''
+    employee_JSON = '{'
     employees = r.json()
     emp_s = len(employees)
     for k in range(emp_s):
@@ -25,7 +25,7 @@ if __name__ == "__main__":
         for todo in all_todos:
             if todo.get('userId') == int(cid):
                 user_todos.append(todo)
-        employee_JSON += '{"' + str(eid) + '": ['
+        employee_JSON += '"' + str(eid) + '": ['
         todos_s = len(user_todos)
         for i in range(todos_s):
             line = '{"username": "' + employee.get('username') + '", '
@@ -36,9 +36,10 @@ if __name__ == "__main__":
             if i != todos_s - 1:
                 line += ', '
             employee_JSON += line
-        employee_JSON += ']}'
-        if k != emp_s - 1:
+        employee_JSON += ']'
+        if k < emp_s - 1:
             employee_JSON += ', '
+    employee_JSON += '}'
 
     with open(f"todo_all_employees.json", 'w') as f:
         f.write(employee_JSON)
