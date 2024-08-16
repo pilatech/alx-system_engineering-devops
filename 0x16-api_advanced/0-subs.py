@@ -15,9 +15,9 @@ def number_of_subscribers(subreddit):
     if (res.status_code == 200):
         if (res.url != url):
             return 0
-        return (subr.get("data")
-                .get("children")[0]
-                .get("data")
-                .get("subreddit_subscribers"))
+        n = 0
+        for child in subr.get("data").get("children"):
+            n += child.get("data").get("subreddit_subscribers")
+        return n
     else:
         return 0
